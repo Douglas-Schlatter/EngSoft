@@ -15,6 +15,29 @@ public class DatabaseLink {
     {
 
     }
+    
+    public ResultSet verificaMatricula(String matricula) throws SQLException{
+        String sqluser = "postgres";
+        String password = "1804";
+        String url = "jdbc:postgresql://localhost:5432/portal";
+        Connection conn = null;
+        Statement statement = null;
+        ResultSet resultSet = null;
+        
+        try{
+             Class.forName("org.postgresql.Driver");
+        }catch(Exception e){
+            e.getMessage();
+        }
+
+        conn = DriverManager.getConnection(url, sqluser, password);
+        String sql = (String) "SELECT * FROM Vinculado WHERE matricula_vinculado = '" + matricula + "'";                              
+        statement = conn.createStatement();
+        resultSet = statement.executeQuery(sql);
+        
+        return resultSet;
+        
+    }
 
     public ArrayList<String> conectaPostgres(String matricula) throws SQLException{
         String sqluser = "postgres";

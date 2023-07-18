@@ -4,6 +4,7 @@
  */
 package view;
 
+import ctr.ControleUsuario;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -131,19 +132,25 @@ public class TelaTickets extends javax.swing.JFrame {
             return;
         }
         
-        
-        this.setVisible(false);
-        ArrayList<String> tickets = new ArrayList();
-        DatabaseLink db = new DatabaseLink();
+        ControleUsuario control = new ControleUsuario(matricula.getText());
         try {
+            control.verificaMatricula(this);
+            
+            /*this.setVisible(false);
+            ArrayList<String> tickets = new ArrayList();
+            DatabaseLink db = new DatabaseLink();
+            try {
             tickets = db.conectaPostgres(matricula.getText());
+            } catch (SQLException ex) {
+            Logger.getLogger(TelaTickets.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            TelaVisualizacao telinha  = (new TelaVisualizacao());
+            telinha.setVisible(true);
+            telinha.exibeLista(tickets);*/
         } catch (SQLException ex) {
             Logger.getLogger(TelaTickets.class.getName()).log(Level.SEVERE, null, ex);
         }
- 
-        TelaVisualizacao telinha  = (new TelaVisualizacao());
-        telinha.setVisible(true);
-        telinha.exibeLista(tickets);
         
     }//GEN-LAST:event_visTicketButtonActionPerformed
 
