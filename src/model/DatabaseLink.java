@@ -9,7 +9,12 @@ import javax.swing.JOptionPane;
 
 public class DatabaseLink {
 
-
+        String sqluser = "postgres";
+        String password = "1707";
+        String url = "jdbc:postgresql://localhost:5432/postgres";
+        Connection conn = null;
+        Statement statement = null;
+        ResultSet resultSet = null;
 
     public DatabaseLink()
     {
@@ -17,12 +22,7 @@ public class DatabaseLink {
     }
     
     public ResultSet verificaMatricula(String matricula) throws SQLException{
-        String sqluser = "postgres";
-        String password = "1804";
-        String url = "jdbc:postgresql://localhost:5432/portal";
-        Connection conn = null;
-        Statement statement = null;
-        ResultSet resultSet = null;
+
         
         try{
              Class.forName("org.postgresql.Driver");
@@ -31,21 +31,45 @@ public class DatabaseLink {
         }
 
         conn = DriverManager.getConnection(url, sqluser, password);
-        String sql = (String) "SELECT * FROM Vinculado WHERE matricula_vinculado = '" + matricula + "'";                              
+        String sql = (String) "SELECT * FROM Registros WHERE matricula = '" + matricula + "'";                              
         statement = conn.createStatement();
         resultSet = statement.executeQuery(sql);
         
         return resultSet;
         
     }
+    
+        public ResultSet verificaSenha(String matricula,String senha) throws SQLException{
+
+        
+        try{
+             Class.forName("org.postgresql.Driver");
+        }catch(Exception e){
+            e.getMessage();
+        }
+
+        conn = DriverManager.getConnection(url, sqluser, password);
+        //String sql = (String) "SELECT * FROM Registros WHERE senha = '" + senha + "'";      
+        String sql = (String) "SELECT * FROM Registros WHERE matricula = '"+ matricula + "' and senha = '" + senha + "'";
+        statement = conn.createStatement();
+        resultSet = statement.executeQuery(sql);
+        
+        return resultSet;
+        
+    }
+    
 
     public ArrayList<String> conectaPostgres(String matricula) throws SQLException{
+        
+        //TODO MAKE ONE FUNCTION ONLY THAT LOGINS AND IT IS STATIC IN THE CLASS
+        /*
         String sqluser = "postgres";
-        String password = "1804";
-        String url = "jdbc:postgresql://localhost:5432/portal";
+        String password = "1707";
+        String url = "jdbc:postgresql://localhost:5432/postgres";
         Connection conn = null;
         Statement statement = null;
         ResultSet resultSet = null;
+*/
         ArrayList<String> tickets = new ArrayList();
 
         try{

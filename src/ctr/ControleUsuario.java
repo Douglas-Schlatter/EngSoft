@@ -21,22 +21,36 @@ import view.TelaVisualizacao;
 public class ControleUsuario {
     
     public String matricula = "";
+    public String senha = "";
     DatabaseLink db = new DatabaseLink();
     ResultSet resultSet;
+    ResultSet passResult;
     
-    public ControleUsuario(String imat){
+    public ControleUsuario(String imat,String isen){
         matricula = imat;
+        senha = isen;
         
     }
     
-    public void verificaMatricula(TelaTickets tl) throws SQLException{
+    public void login(TelaTickets telaTick) throws SQLException{
         resultSet = db.verificaMatricula(matricula);
+        
+        
         
         if(!resultSet.next()){
             JOptionPane.showMessageDialog(null, "Matricula Inexistente");
         }
         else{
-            this.visualizaTicket();
+            passResult = db.verificaSenha(matricula,senha);
+            if(!passResult.next()){
+            JOptionPane.showMessageDialog(null, "Senha Incorreta");
+            }
+            else
+            {
+             this.visualizaTicket();
+             telaTick.setVisible(false);
+            }
+           
         }
     }
     
@@ -48,7 +62,8 @@ public class ControleUsuario {
         }catch (SQLException ex){
             Logger.getLogger(TelaTickets.class.getName()).log(Level.SEVERE, null, ex);
         }
- 
+        
+        
         TelaVisualizacao telinha  = (new TelaVisualizacao());
         telinha.setVisible(true);
         telinha.exibeLista(tickets);
