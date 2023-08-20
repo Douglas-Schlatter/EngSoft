@@ -15,13 +15,17 @@ public class DatabaseLink {
         Connection conn = null;
         Statement statement = null;
         ResultSet resultSet = null;
+        String matricula = "";
+        String senha = "";
+        
 
-    public DatabaseLink()
+    public DatabaseLink(String imat,String isen)
     {
-
+        matricula = imat;
+        senha = isen;
     }
     
-    public ResultSet verificaMatricula(String matricula) throws SQLException{
+    public ResultSet verificaMatricula() throws SQLException{
 
         
         try{
@@ -39,7 +43,7 @@ public class DatabaseLink {
         
     }
     
-        public ResultSet verificaSenha(String matricula,String senha) throws SQLException{
+        public ResultSet verificaSenha() throws SQLException{
 
         
         try{
@@ -57,9 +61,32 @@ public class DatabaseLink {
         return resultSet;
         
     }
+        
+    public String verificaUsuario() throws SQLException{
+
+        
+        try{
+             Class.forName("org.postgresql.Driver");
+        }catch(Exception e){
+            e.getMessage();
+        }
+
+        conn = DriverManager.getConnection(url, sqluser, password);
+        //String sql = (String) "SELECT * FROM Registros WHERE senha = '" + senha + "'";      
+        String sql = (String) "SELECT tipo FROM Registros WHERE matricula = '"+ matricula + "' and senha = '" + senha + "'";
+        statement = conn.createStatement();
+        resultSet = statement.executeQuery(sql);
+        
+     
+                
+         //System.out.println(resultSet.toString());
+         resultSet.next();
+        return resultSet.getString("tipo");
+        
+    }
     
 
-    public ArrayList<String> conectaPostgres(String matricula) throws SQLException{
+    public ArrayList<String> pegarTickets() throws SQLException{
         
         //TODO MAKE ONE FUNCTION ONLY THAT LOGINS AND IT IS STATIC IN THE CLASS
         /*

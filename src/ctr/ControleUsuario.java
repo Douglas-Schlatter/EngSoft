@@ -11,7 +11,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import model.DatabaseLink;
+import view.TelaGerente;
+import view.TelaLogin;
 import view.TelaTickets;
+import view.TelaVinculado;
 import view.TelaVisualizacao;
 
 /**
@@ -22,18 +25,18 @@ public class ControleUsuario {
     
     public String matricula = "";
     public String senha = "";
-    DatabaseLink db = new DatabaseLink();
+    DatabaseLink db;
     ResultSet resultSet;
     ResultSet passResult;
     
     public ControleUsuario(String imat,String isen){
         matricula = imat;
         senha = isen;
-        
+        db = new DatabaseLink(matricula,senha);
     }
     
-    public void login(TelaTickets telaTick) throws SQLException{
-        resultSet = db.verificaMatricula(matricula);
+    public void login(TelaLogin tela) throws SQLException{
+        resultSet = db.verificaMatricula();
         
         
         
@@ -41,14 +44,24 @@ public class ControleUsuario {
             JOptionPane.showMessageDialog(null, "Matricula Inexistente");
         }
         else{
-            passResult = db.verificaSenha(matricula,senha);
+            passResult = db.verificaSenha();
             if(!passResult.next()){
             JOptionPane.showMessageDialog(null, "Senha Incorreta");
             }
             else
             {
-             this.visualizaTicket();
-             telaTick.setVisible(false);
+                //System.out.println(db.verificaUsuario());
+                if (db.verificaUsuario().equals( "v")) {
+                TelaVinculado telinha  = (new TelaVinculado());
+                telinha.setVisible(true);
+                } else {
+                TelaGerente telinha  = (new TelaGerente());
+                telinha.setVisible(true);
+                }
+             //this.visualizaTicket();
+
+             tela.setVisible(false);
+             
             }
            
         }
@@ -58,7 +71,7 @@ public class ControleUsuario {
         ArrayList<String> tickets = new ArrayList();
         
         try {
-            tickets = db.conectaPostgres(matricula);
+            tickets = db.pegarTickets();
         }catch (SQLException ex){
             Logger.getLogger(TelaTickets.class.getName()).log(Level.SEVERE, null, ex);
         }
