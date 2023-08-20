@@ -6,6 +6,7 @@ package Main.Back;
 
 
 import model.DatabaseLink;
+import view.TelaLogin;
 import view.TelaTickets;
 
 
@@ -16,6 +17,6 @@ import view.TelaTickets;
 public class Main {
 
     public static void main(String[] args) {
-        new TelaTickets().setVisible(true);
+        new TelaLogin().setVisible(true);
     }
 }

@@ -152,6 +152,8 @@ public class TelaTickets extends javax.swing.JFrame {
 
     private void visTicketButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_visTicketButtonActionPerformed
         // TODO add your handling code here:
+        //Essa parte do codigo foi transferida para tela login
+        /*
         if(matricula.getText().isEmpty()){
             JOptionPane.showMessageDialog(null, "Insira seus dados no campo superior direito");
             return;
@@ -164,6 +166,7 @@ public class TelaTickets extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(TelaTickets.class.getName()).log(Level.SEVERE, null, ex);
         }
+        */
         
 
         
