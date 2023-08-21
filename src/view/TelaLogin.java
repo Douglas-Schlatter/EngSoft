@@ -4,6 +4,7 @@
  */
 package view;
 
+import Main.Back.Main;
 import ctr.ControleUsuario;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -157,7 +158,8 @@ public class TelaLogin extends javax.swing.JFrame {
             return;
         }
         
-        ControleUsuario control = new ControleUsuario(matricula.getText(),senha.getText());
+        //ControleUsuario control = new ControleUsuario(matricula.getText(),senha.getText());
+        Main.controleU.iniciaControle(matricula.getText(),senha.getText());
         try {
             control.login(this);
             
