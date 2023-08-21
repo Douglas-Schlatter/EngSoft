@@ -10,7 +10,7 @@ import javax.swing.JOptionPane;
 public class DatabaseLink {
 
         String sqluser = "postgres";
-        String password = "ars240102";
+        String password = "1804";
         String url = "jdbc:postgresql://localhost:5432/postgres";
         Connection conn = null;
         Statement statement = null;
