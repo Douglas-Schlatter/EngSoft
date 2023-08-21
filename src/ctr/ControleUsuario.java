@@ -29,7 +29,11 @@ public class ControleUsuario {
     ResultSet resultSet;
     ResultSet passResult;
     
-    public ControleUsuario(String imat,String isen){
+    public ControleUsuario(){
+
+    }
+    public void iniciaControle(String imat,String isen)
+    {
         matricula = imat;
         senha = isen;
         db = new DatabaseLink(matricula,senha);
