@@ -4,6 +4,8 @@
  */
 package view;
 
+import Main.Back.Main;
+
 /**
  *
  * @author Douglas
@@ -46,7 +48,7 @@ public class TelaVinculado extends javax.swing.JFrame {
         });
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel2.setText("Olá *Nome*, bem-vindo!");
+        jLabel2.setText(String.valueOf(Main.controleU.nome));
 
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fotos/tiquete.png"))); // NOI18N
         jButton5.setText("Gerenciar Tiquetes");
@@ -68,7 +70,6 @@ public class TelaVinculado extends javax.swing.JFrame {
 
         jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fotos/enquetes.png"))); // NOI18N
         jButton7.setText("Enquetes");
-        jButton7.setActionCommand("Enquetes");
         jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton7ActionPerformed(evt);

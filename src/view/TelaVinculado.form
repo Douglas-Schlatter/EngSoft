@@ -116,7 +116,9 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="18" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Ol&#xe1; *Nome*, bem-vindo!"/>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="String.valueOf(Main.controleU.nome)" type="code"/>
+        </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="jButton5">
@@ -154,7 +156,6 @@
           <Image iconType="3" name="/fotos/enquetes.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Enquetes"/>
-        <Property name="actionCommand" type="java.lang.String" value="Enquetes"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton7ActionPerformed"/>

@@ -25,6 +25,7 @@ public class ControleUsuario {
     
     public String matricula = "";
     public String senha = "";
+    public String nome = "";
     DatabaseLink db;
     ResultSet resultSet;
     ResultSet passResult;
@@ -32,12 +33,25 @@ public class ControleUsuario {
     public ControleUsuario(){
 
     }
+    
+    public void getNome() throws SQLException {
+        nome = db.getNomeDB();
+        System.out.println(nome);
+    }
+    
+    public void iniciaControle(String imat)
+    {
+        matricula = imat;
+        db = new DatabaseLink(matricula);
+    }
+    
     public void iniciaControle(String imat,String isen)
     {
         matricula = imat;
         senha = isen;
         db = new DatabaseLink(matricula,senha);
     }
+    
     
     public void login(TelaLogin tela) throws SQLException{
         resultSet = db.verificaMatricula();
@@ -52,9 +66,10 @@ public class ControleUsuario {
             if(!passResult.next()){
             JOptionPane.showMessageDialog(null, "Senha Incorreta");
             }
-            else
+            else // deu certo e o usuario existe
             {
                 //System.out.println(db.verificaUsuario());
+                
                 if (db.verificaUsuario().equals( "v")) {
                 TelaVinculado telinha  = (new TelaVinculado());
                 telinha.setVisible(true);
@@ -85,4 +100,28 @@ public class ControleUsuario {
         telinha.setVisible(true);
         telinha.exibeLista(tickets);
     }
+    
+    
+    public Boolean isUsuario() throws SQLException {
+        resultSet = db.verificaMatricula(matricula);
+        resultSet.next();
+        String mat = resultSet.getString("matricula_vinculado");
+        
+        if(mat.isEmpty()) {
+            return false;
+        }
+        else {
+            return true;
+        }
+        
+ }
+    public String resgataTicket(String tiquete) {
+        
+        
+    }
+    
 }
+    
+    
+    
+

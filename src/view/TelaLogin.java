@@ -161,8 +161,9 @@ public class TelaLogin extends javax.swing.JFrame {
         //ControleUsuario control = new ControleUsuario(matricula.getText(),senha.getText());
         Main.controleU.iniciaControle(matricula.getText(),senha.getText());
         try {
-            control.login(this);
-            
+            Main.controleU.login(this);
+            Main.controleU.getNome();
+              
         } catch (SQLException ex) {
             Logger.getLogger(TelaTickets.class.getName()).log(Level.SEVERE, null, ex);
         } // TODO add your handling code here:

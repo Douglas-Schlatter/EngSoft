@@ -25,7 +25,31 @@ public class DatabaseLink {
         senha = isen;
     }
     
+    public DatabaseLink(String imat)
+    {
+        matricula = imat;
+    }
+    
+
     public ResultSet verificaMatricula() throws SQLException{
+
+        
+        try{
+             Class.forName("org.postgresql.Driver");
+        }catch(Exception e){
+            e.getMessage();
+        }
+
+        conn = DriverManager.getConnection(url, sqluser, password);
+        String sql = (String) "SELECT * FROM Registros WHERE matricula = '" + matricula + "'";                              
+        statement = conn.createStatement();
+        resultSet = statement.executeQuery(sql);
+        
+        return resultSet;
+        
+    }
+    
+    public ResultSet verificaMatricula(String matricula) throws SQLException{
 
         
         try{
@@ -62,6 +86,30 @@ public class DatabaseLink {
         
     }
         
+        public String getNomeDB() throws SQLException{
+
+        
+        try{
+             Class.forName("org.postgresql.Driver");
+        }catch(Exception e){
+            e.getMessage();
+        }
+
+        conn = DriverManager.getConnection(url, sqluser, password);
+        //String sql = (String) "SELECT * FROM Registros WHERE senha = '" + senha + "'";      
+        String sql = (String) "SELECT nome FROM Registros WHERE matricula = '"+ matricula + "' and senha = '" + senha + "'";
+        statement = conn.createStatement();
+        resultSet = statement.executeQuery(sql);
+        
+     
+                
+         //System.out.println(resultSet.toString());
+         resultSet.next();
+         //System.out.println(resultSet.getString("nome"));
+        return resultSet.getString("nome");
+        
+    }
+        
     public String verificaUsuario() throws SQLException{
 
         
@@ -85,7 +133,6 @@ public class DatabaseLink {
         
     }
     
-
     public ArrayList<String> pegarTickets() throws SQLException{
         
         //TODO MAKE ONE FUNCTION ONLY THAT LOGINS AND IT IS STATIC IN THE CLASS
@@ -135,8 +182,21 @@ public class DatabaseLink {
         }
         
         return tickets;
+    }
+    
+    public String pegarTicket(String matricula, String ticket) throws SQLException{
+        
+        try{
+             Class.forName("org.postgresql.Driver");
+        }catch(Exception e){
+            e.getMessage();
+        }
 
-
+        conn = DriverManager.getConnection(url, sqluser, password);
+        String sql = (String) "SELECT id_tiquete FROM Tiquetes NATURAL JOIN Vinculado WHERE id_tiquete = '" and matricula_vinculado = '00333363'";                              
+        statement = conn.createStatement();
+        resultSet = statement.executeQuery(sql);
+        
     }
 
 }
