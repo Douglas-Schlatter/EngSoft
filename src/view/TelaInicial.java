@@ -188,7 +188,7 @@ public class TelaInicial extends javax.swing.JFrame {
         else {
             String mat = matriculaField.getText();
             String ticket = ticketField.getText();
-            Main.controleU.iniciaControle(mat);
+             Main.controleT.iniciaControle(mat,ticket);
             try {
                 if(Main.controleU.isUsuario()){
                     

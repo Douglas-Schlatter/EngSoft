@@ -158,8 +158,12 @@ public class TelaLogin extends javax.swing.JFrame {
             return;
         }
         
-        //ControleUsuario control = new ControleUsuario(matricula.getText(),senha.getText());
-        Main.controleU.iniciaControle(matricula.getText(),senha.getText());
+        try {
+            //ControleUsuario control = new ControleUsuario(matricula.getText(),senha.getText());
+            Main.controleU.iniciaControle(matricula.getText(),senha.getText());
+        } catch (SQLException ex) {
+            Logger.getLogger(TelaLogin.class.getName()).log(Level.SEVERE, null, ex);
+        }
         try {
             Main.controleU.login(this);
             Main.controleU.getNome();

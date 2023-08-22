@@ -5,6 +5,7 @@
 package Main.Back;
 
 
+import ctr.ControleUsoTickets;
 import ctr.ControleUsuario;
 import model.DatabaseLink;
 import view.TelaLogin;
@@ -18,7 +19,7 @@ import view.TelaTickets;
 public class Main {
 
     public static ControleUsuario controleU = new ControleUsuario(); 
-    
+    public static ControleUsoTickets controleT = new ControleUsoTickets();
     public static void main(String[] args) {
         
         

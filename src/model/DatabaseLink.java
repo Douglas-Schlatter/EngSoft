@@ -10,25 +10,37 @@ import javax.swing.JOptionPane;
 public class DatabaseLink {
 
         String sqluser = "postgres";
-        String password = "1804";
+        String password = "1707";
         String url = "jdbc:postgresql://localhost:5432/postgres";
         Connection conn = null;
         Statement statement = null;
         ResultSet resultSet = null;
         String matricula = "";
         String senha = "";
+        String codRefeicao = "";
         
 
-    public DatabaseLink(String imat,String isen)
+    public DatabaseLink(String imat,String ientrada,String t) throws SQLException
     {
         matricula = imat;
-        senha = isen;
+        if(t =="l")
+        {
+            //Nesse caso a entrada eh para login sendo equivalente a senha
+                senha = ientrada;
+                codRefeicao = "";
+        }
+        else
+        {
+            //Nesse caso a entrada eh para uso de ticket sendo equivalente a codRefeicao
+            senha = "";
+            codRefeicao = ientrada;
+        }
+
+        conn = DriverManager.getConnection(url, sqluser, password);
+        statement = conn.createStatement();
     }
-    
-    public DatabaseLink(String imat)
-    {
-        matricula = imat;
-    }
+  
+
     
 
     public ResultSet verificaMatricula() throws SQLException{
@@ -42,30 +54,13 @@ public class DatabaseLink {
 
         conn = DriverManager.getConnection(url, sqluser, password);
         String sql = (String) "SELECT * FROM Registros WHERE matricula = '" + matricula + "'";                              
-        statement = conn.createStatement();
         resultSet = statement.executeQuery(sql);
         
         return resultSet;
         
     }
     
-    public ResultSet verificaMatricula(String matricula) throws SQLException{
 
-        
-        try{
-             Class.forName("org.postgresql.Driver");
-        }catch(Exception e){
-            e.getMessage();
-        }
-
-        conn = DriverManager.getConnection(url, sqluser, password);
-        String sql = (String) "SELECT * FROM Registros WHERE matricula = '" + matricula + "'";                              
-        statement = conn.createStatement();
-        resultSet = statement.executeQuery(sql);
-        
-        return resultSet;
-        
-    }
     
         public ResultSet verificaSenha() throws SQLException{
 
@@ -76,10 +71,10 @@ public class DatabaseLink {
             e.getMessage();
         }
 
-        conn = DriverManager.getConnection(url, sqluser, password);
+        //conn = DriverManager.getConnection(url, sqluser, password);
         //String sql = (String) "SELECT * FROM Registros WHERE senha = '" + senha + "'";      
         String sql = (String) "SELECT * FROM Registros WHERE matricula = '"+ matricula + "' and senha = '" + senha + "'";
-        statement = conn.createStatement();
+        //statement = conn.createStatement();
         resultSet = statement.executeQuery(sql);
         
         return resultSet;
@@ -95,10 +90,10 @@ public class DatabaseLink {
             e.getMessage();
         }
 
-        conn = DriverManager.getConnection(url, sqluser, password);
+        //conn = DriverManager.getConnection(url, sqluser, password);
         //String sql = (String) "SELECT * FROM Registros WHERE senha = '" + senha + "'";      
         String sql = (String) "SELECT nome FROM Registros WHERE matricula = '"+ matricula + "' and senha = '" + senha + "'";
-        statement = conn.createStatement();
+        //statement = conn.createStatement();
         resultSet = statement.executeQuery(sql);
         
      
@@ -119,10 +114,10 @@ public class DatabaseLink {
             e.getMessage();
         }
 
-        conn = DriverManager.getConnection(url, sqluser, password);
+        //conn = DriverManager.getConnection(url, sqluser, password);
         //String sql = (String) "SELECT * FROM Registros WHERE senha = '" + senha + "'";      
         String sql = (String) "SELECT tipo FROM Registros WHERE matricula = '"+ matricula + "' and senha = '" + senha + "'";
-        statement = conn.createStatement();
+        //statement = conn.createStatement();
         resultSet = statement.executeQuery(sql);
         
      
@@ -152,9 +147,9 @@ public class DatabaseLink {
             e.getMessage();
         }
 
-        conn = DriverManager.getConnection(url, sqluser, password);
+        //conn = DriverManager.getConnection(url, sqluser, password);
         String sql = (String) "SELECT id_tiquete FROM Vinculado JOIN Tiquetes ON (Vinculado.matricula_vinculado = Tiquetes.id_vinculado) WHERE matricula_vinculado = '" + matricula + "'";                              
-        statement = conn.createStatement();
+        //statement = conn.createStatement();
         resultSet = statement.executeQuery(sql);
         
         try{
@@ -192,10 +187,11 @@ public class DatabaseLink {
             e.getMessage();
         }
 
-        conn = DriverManager.getConnection(url, sqluser, password);
-        String sql = (String) "SELECT id_tiquete FROM Tiquetes NATURAL JOIN Vinculado WHERE id_tiquete = '" and matricula_vinculado = '00333363'";                              
-        statement = conn.createStatement();
+        //conn = DriverManager.getConnection(url, sqluser, password);
+        String sql = (String) "SELECT id_tiquete FROM Tiquetes NATURAL JOIN Vinculado WHERE id_tiquete = "+ticket+ " ' and matricula_vinculado ="+matricula ;                              
+        //statement = conn.createStatement();
         resultSet = statement.executeQuery(sql);
+            return null;
         
     }
 

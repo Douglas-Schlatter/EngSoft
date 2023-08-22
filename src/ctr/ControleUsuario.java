@@ -39,17 +39,13 @@ public class ControleUsuario {
         System.out.println(nome);
     }
     
-    public void iniciaControle(String imat)
-    {
-        matricula = imat;
-        db = new DatabaseLink(matricula);
-    }
+
     
-    public void iniciaControle(String imat,String isen)
+    public void iniciaControle(String imat,String isen) throws SQLException
     {
         matricula = imat;
         senha = isen;
-        db = new DatabaseLink(matricula,senha);
+        db = new DatabaseLink(matricula,senha,"l");
     }
     
     
@@ -102,22 +98,10 @@ public class ControleUsuario {
     }
     
     
-    public Boolean isUsuario() throws SQLException {
-        resultSet = db.verificaMatricula(matricula);
-        resultSet.next();
-        String mat = resultSet.getString("matricula_vinculado");
-        
-        if(mat.isEmpty()) {
-            return false;
-        }
-        else {
-            return true;
-        }
-        
- }
+
     public String resgataTicket(String tiquete) {
         
-        
+        return null;
     }
     
 }
