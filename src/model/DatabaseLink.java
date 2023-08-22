@@ -179,7 +179,7 @@ public class DatabaseLink {
         return tickets;
     }
     
-    public String pegarTicket(String matricula, String ticket) throws SQLException{
+    public String verificaTicket(String matricula, String ticket) throws SQLException{
         
         try{
              Class.forName("org.postgresql.Driver");
