@@ -10,7 +10,7 @@ import javax.swing.JOptionPane;
 public class DatabaseLink {
 
         String sqluser = "postgres";
-        String password = "1707";
+        String password = "1804";
         String url = "jdbc:postgresql://localhost:5432/postgres";
         Connection conn = null;
         Statement statement = null;
@@ -40,9 +40,6 @@ public class DatabaseLink {
         statement = conn.createStatement();
     }
   
-
-    
-
     public ResultSet verificaMatricula() throws SQLException{
 
         
@@ -54,6 +51,24 @@ public class DatabaseLink {
 
         conn = DriverManager.getConnection(url, sqluser, password);
         String sql = (String) "SELECT * FROM Registros WHERE matricula = '" + matricula + "'";                              
+        resultSet = statement.executeQuery(sql);
+        
+        return resultSet;
+        
+    }
+    
+    
+    public ResultSet verificaMatricula(String matricula) throws SQLException{
+
+        
+        try{
+             Class.forName("org.postgresql.Driver");
+        }catch(Exception e){
+            e.getMessage();
+        }
+
+        conn = DriverManager.getConnection(url, sqluser, password);
+        String sql = (String) "SELECT * FROM Registros WHERE matricula = '"+matricula+"'";                              
         resultSet = statement.executeQuery(sql);
         
         return resultSet;
@@ -180,7 +195,6 @@ public class DatabaseLink {
     }
     
     public String verificaTicket(String matricula, String ticket) throws SQLException{
-        
         try{
              Class.forName("org.postgresql.Driver");
         }catch(Exception e){
@@ -188,11 +202,25 @@ public class DatabaseLink {
         }
 
         //conn = DriverManager.getConnection(url, sqluser, password);
-        String sql = (String) "SELECT id_tiquete FROM Tiquetes NATURAL JOIN Vinculado WHERE id_tiquete = "+ticket+ " ' and matricula_vinculado ="+matricula ;                              
+        String sql = (String) "SELECT * FROM Tiquetes NATURAL JOIN Vinculado WHERE id_tiquete = '"+ticket+"' and matricula_vinculado = '"+matricula+"'";
+        
         //statement = conn.createStatement();
         resultSet = statement.executeQuery(sql);
-            return null;
+        resultSet.next();
+        return resultSet.getString("id_tiquete");
+    }
+    
+    public int deletarTicket(String matricula, String ticket) throws SQLException{
+        try{
+             Class.forName("org.postgresql.Driver");
+        }catch(Exception e){
+            e.getMessage();
+        }
         
+        String sql = (String) "DELETE FROM Tiquetes WHERE id_tiquete = '"+ticket+"' and matricula_vinculado = '"+matricula+"'";
+        
+        int result = statement.executeUpdate(sql);
+        return result;
     }
 
 }

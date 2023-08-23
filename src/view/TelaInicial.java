@@ -195,11 +195,11 @@ public class TelaInicial extends javax.swing.JFrame {
             }
             try {
                 if(Main.controleT.isUsuario()){
-                    
-                    
-                    
+                    Main.controleT.utilizarTicket(ticket);
                 }
-                
+                else {
+                    JOptionPane.showMessageDialog(null, "Usuário não existente no banco de dados.");
+                }
                 
                 
             } catch (SQLException ex) {

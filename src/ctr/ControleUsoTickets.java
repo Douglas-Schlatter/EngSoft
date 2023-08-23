@@ -6,6 +6,7 @@ package ctr;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.JOptionPane;
 import model.DatabaseLink;
 
 /**
@@ -13,7 +14,7 @@ import model.DatabaseLink;
  * @author Douglas
  */
 public class ControleUsoTickets {
-        public String matricula = "";
+    public String matricula = "";
     public String entrada = "";
     public String nome = "";
     DatabaseLink db;
@@ -29,10 +30,10 @@ public class ControleUsoTickets {
         db = new DatabaseLink(matricula,entrada,"c");
     }
     
-        public Boolean isUsuario() throws SQLException {
-        resultSet = db.verificaMatricula();
+    public Boolean isUsuario() throws SQLException {
+        resultSet = db.verificaMatricula(matricula);
         resultSet.next();
-        String mat = resultSet.getString("matricula_vinculado");
+        String mat = resultSet.getString("matricula");
         
         if(mat.isEmpty()) {
             return false;
@@ -41,18 +42,15 @@ public class ControleUsoTickets {
             return true;
         }
         }
-        
-        public Boolean isTicket() throws SQLException {
-        resultSet = db.verificaMatricula();
-        resultSet.next();
-        String mat = resultSet.getString("matricula_vinculado");
-        
-        if(mat.isEmpty()) {
-            return false;
-        }
-        else {
-            return true;
+       
+    
+    public void utilizarTicket(String ticket) throws SQLException {
+        if(!db.verificaTicket(matricula,ticket).isEmpty()) {
+            if(db.deletarTicket(matricula, ticket) == 1){
+                JOptionPane.showMessageDialog(null, "Tíquete deletado com sucesso.");
+            }
         }
         
     }
+    
 }
