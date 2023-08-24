@@ -8,8 +8,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import model.DatabaseLink;
-import view.TelaInicial;
-import view.TelaLogin;
 
 /**
  *
@@ -25,13 +23,6 @@ public class ControleUsoTickets {
     {
     
     }
-    public void IniciaTelaLogin(TelaInicial telai)
-    {
-        TelaLogin telinha  = (new TelaLogin());
-        telinha.setVisible(true);
-        telai.setVisible(false);
-    }
-    
     public void iniciaControle(String imat,String ient) throws SQLException
     {
         matricula = imat;
@@ -40,26 +31,42 @@ public class ControleUsoTickets {
     }
     
     public Boolean isUsuario() throws SQLException {
-        resultSet = db.verificaMatricula(matricula);
-        resultSet.next();
-        String mat = resultSet.getString("matricula");
-        
-        if(mat.isEmpty()) {
-            return false;
-        }
-        else {
+        //Boolean mat = db.verificaMatricula(matricula);
+        //resultSet.next();
+        //String mat = resultSet.getString("matricula");
+        System.out.println("isUsuario "+matricula);
+        if(db.verificaMatricula(matricula)){
             return true;
         }
-        }
+        else return false;
+        
+     }
        
     
     public void utilizarTicket(String ticket) throws SQLException {
- 
-        if(!db.verificaTicket(matricula,ticket).isEmpty()) {
-            if(db.deletarTicket(matricula, ticket) == 1){
-                JOptionPane.showMessageDialog(null, "Tíquete deletado com sucesso.");
+       
+        if(ticket.charAt(0) == '0'){ // é ticket
+            if(!db.verificaTicket(matricula,ticket).isEmpty()) {
+                if(db.deletarTicket(matricula, ticket) == 1){
+                  JOptionPane.showMessageDialog(null, "Tíquete deletado com sucesso.");
             }
         }
+            else {
+                JOptionPane.showMessageDialog(null, "Tíquete não existe no banco de dados");
+            }
+        }
+        
+        else{  // é pool
+            if(!db.verificaPool(matricula,ticket).isEmpty()) {
+                if(db.descontarPool(matricula, ticket) == 1){
+                  JOptionPane.showMessageDialog(null, "Pool atualizada.");
+            }
+        }
+            else {
+                JOptionPane.showMessageDialog(null, "Este usuário não participa da pool informada.");
+            }
+        }
+        
         
     }
     
