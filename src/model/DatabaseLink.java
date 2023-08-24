@@ -58,9 +58,8 @@ public class DatabaseLink {
     }
     
     
-    public ResultSet verificaMatricula(String matricula) throws SQLException{
+    public Boolean verificaMatricula(String matricula) throws SQLException{
 
-        
         try{
              Class.forName("org.postgresql.Driver");
         }catch(Exception e){
@@ -71,8 +70,16 @@ public class DatabaseLink {
         String sql = (String) "SELECT * FROM Registros WHERE matricula = '"+matricula+"'";                              
         resultSet = statement.executeQuery(sql);
         
-        return resultSet;
-        
+        if(!resultSet.next()) {
+            
+            return false;
+        }  
+        else{
+            String mat = resultSet.getString("matricula");
+            System.out.println("return do sql "+ mat);
+            return true;
+        }
+     
     }
     
 
@@ -206,8 +213,63 @@ public class DatabaseLink {
         
         //statement = conn.createStatement();
         resultSet = statement.executeQuery(sql);
+        String tick = "";
+        if(!resultSet.next()) {
+            return tick;
+        }
+        else {
+            tick = resultSet.getString("id_tiquete");
+            return tick;
+        }
+    }
+    
+    public String verificaPool(String matricula, String pool) throws SQLException{
+        try{
+             Class.forName("org.postgresql.Driver");
+        }catch(Exception e){
+            e.getMessage();
+        }
+
+        //conn = DriverManager.getConnection(url, sqluser, password);
+        String sql = (String) "SELECT * FROM relation_vinculado_pool NATURAL JOIN Pool WHERE id_pool = '"+pool+"' AND matricula_vinculado = '"+matricula+"'";
+        
+        //statement = conn.createStatement();
+        resultSet = statement.executeQuery(sql);
+        String res = "";
+        if(!resultSet.next()) {
+            return res;
+        }
+        else {
+            res = resultSet.getString("id_pool");
+            return res;
+        }
+    }
+    
+    public int descontarPool(String matricula, String pool) throws SQLException{
+        try{
+             Class.forName("org.postgresql.Driver");
+        }catch(Exception e){
+            e.getMessage();
+        }
+        String sql = (String) "SELECT * FROM relation_vinculado_pool NATURAL JOIN Pool WHERE id_pool = '"+pool+"' AND matricula_vinculado = '"+matricula+"'";
+        
+        resultSet = statement.executeQuery(sql);
         resultSet.next();
-        return resultSet.getString("id_tiquete");
+        int usos = resultSet.getInt("uses");
+        usos = usos - 1;
+        
+        int result = 0;
+        
+        if(usos == 0){
+            sql = (String) "DELETE FROM Pool WHERE id_pool = '"+pool+"'";
+            result = statement.executeUpdate(sql);
+        }
+        else {
+            sql = (String) "UPDATE Pool SET uses = '"+usos+"' WHERE id_pool = '"+pool+"'";
+            result = statement.executeUpdate(sql);
+        }
+       
+        return result;
     }
     
     public int deletarTicket(String matricula, String ticket) throws SQLException{
@@ -216,10 +278,23 @@ public class DatabaseLink {
         }catch(Exception e){
             e.getMessage();
         }
+        String sql = (String) "SELECT * FROM Tiquetes NATURAL JOIN Vinculado WHERE id_tiquete = '"+ticket+"' and matricula_vinculado = '"+matricula+"'";
+        resultSet = statement.executeQuery(sql);
+        resultSet.next();
+        int usos = resultSet.getInt("usos_restantes");
+        usos = usos - 1;
         
-        String sql = (String) "DELETE FROM Tiquetes WHERE id_tiquete = '"+ticket+"' and matricula_vinculado = '"+matricula+"'";
+        int result = 0;
         
-        int result = statement.executeUpdate(sql);
+        if(usos == 0){
+            sql = (String) "DELETE FROM Tiquetes WHERE id_tiquete = '"+ticket+"' and matricula_vinculado = '"+matricula+"'";
+            result = statement.executeUpdate(sql);
+        }
+        else {
+            sql = (String) "UPDATE Tiquetes SET usos_restantes = '"+usos+"' WHERE id_tiquete = '"+ticket+"'";
+            result = statement.executeUpdate(sql);
+        }
+       
         return result;
     }
 

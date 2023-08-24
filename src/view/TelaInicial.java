@@ -45,6 +45,7 @@ public class TelaInicial extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle(" ");
+        setResizable(false);
 
         jLabel2.setFont(new java.awt.Font("Trebuchet MS", 0, 36)); // NOI18N
         jLabel2.setText("Sistema RU++");
