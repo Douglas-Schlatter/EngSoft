@@ -6,8 +6,16 @@ package ctr;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.DefaultListModel;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 import model.DatabaseLink;
+import view.TelaGerenciarTickets;
+import view.TelaTickets;
+import view.TelaVisualizacao;
 
 /**
  *
@@ -19,6 +27,7 @@ public class ControleUsoTickets {
     public String nome = "";
     DatabaseLink db;
     ResultSet resultSet;
+    
     public ControleUsoTickets()
     {
     
@@ -48,7 +57,7 @@ public class ControleUsoTickets {
         if(ticket.charAt(0) == '0'){ // é ticket
             if(!db.verificaTicket(matricula,ticket).isEmpty()) {
                 if(db.deletarTicket(matricula, ticket) == 1){
-                  JOptionPane.showMessageDialog(null, "Tíquete deletado com sucesso.");
+                  JOptionPane.showMessageDialog(null, "Tíquete utilizado com sucesso.");
             }
         }
             else {
@@ -68,6 +77,22 @@ public class ControleUsoTickets {
         }
         
         
+    }
+    
+    
+    public void visualizaTicket(TelaGerenciarTickets tela){
+        ArrayList<String> tickets = new ArrayList();
+        
+        try {
+            tickets = db.pegarTickets();
+        }catch (SQLException ex){
+            Logger.getLogger(TelaTickets.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        TelaVisualizacao telinha  = (new TelaVisualizacao());
+        tela.setVisible(false);
+        telinha.setVisible(true);
+        telinha.exibeLista(tickets);
     }
     
 }

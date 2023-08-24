@@ -81,28 +81,7 @@ public class ControleUsuario {
            
         }
     }
-    
-    public void visualizaTicket(){
-        ArrayList<String> tickets = new ArrayList();
-        
-        try {
-            tickets = db.pegarTickets();
-        }catch (SQLException ex){
-            Logger.getLogger(TelaTickets.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        
-        TelaVisualizacao telinha  = (new TelaVisualizacao());
-        telinha.setVisible(true);
-        telinha.exibeLista(tickets);
-    }
-    
-    
-
-    public String resgataTicket(String tiquete) {
-        
-        return null;
-    }
+     
     
 }
     

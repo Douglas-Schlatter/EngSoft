@@ -169,29 +169,39 @@ public class DatabaseLink {
             e.getMessage();
         }
 
-        //conn = DriverManager.getConnection(url, sqluser, password);
-        String sql = (String) "SELECT id_tiquete FROM Vinculado JOIN Tiquetes ON (Vinculado.matricula_vinculado = Tiquetes.id_vinculado) WHERE matricula_vinculado = '" + matricula + "'";                              
-        //statement = conn.createStatement();
+        
+        String sql = (String) "SELECT id_tiquete FROM Vinculado NATURAL JOIN Tiquetes WHERE matricula_vinculado = '" + matricula + "'";                              
+        
         resultSet = statement.executeQuery(sql);
         
         try{
-            
-        // Criar a declaração SQL
-
-            // Executar a consulta SQL
-        
+               
         while (resultSet.next()) {
-                // Extrair dados do resultado
+               
                 String nome = resultSet.getString("id_tiquete");
 
-                // Fazer algo com os dados obtidos
                tickets.add("Tiquete: " +nome);
         }
-        //System.out.println("OI");
-        if(conn != null){
-            //System.out.println("OI");
+       
+        }catch(Exception e){
+            //System.out.println(e.getMessage());
+
+            JOptionPane.showMessageDialog(null, "Banco de dados não conectado");
         }
-        conn.close();
+        
+        sql = (String) "SELECT id_pool FROM relation_vinculado_pool NATURAL JOIN Pool WHERE matricula_vinculado = '"+matricula+"'";                              
+        
+        resultSet = statement.executeQuery(sql);
+        
+        try{
+               
+        while (resultSet.next()) {
+               
+               String nome = resultSet.getString("id_pool");
+
+               tickets.add("Pool: " +nome);
+        }
+       
         }catch(Exception e){
             //System.out.println(e.getMessage());
 
