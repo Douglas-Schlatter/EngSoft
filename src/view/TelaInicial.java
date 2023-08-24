@@ -5,7 +5,7 @@
 package view;
 
 import javax.swing.JOptionPane;
-import Main.Back.Main;
+import Main.Main;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -211,7 +211,7 @@ public class TelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_utilizarTicketButtonActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
+        Main.controleT.IniciaTelaLogin(this);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**

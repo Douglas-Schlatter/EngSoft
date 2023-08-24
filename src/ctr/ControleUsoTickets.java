@@ -8,6 +8,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import model.DatabaseLink;
+import view.TelaInicial;
+import view.TelaLogin;
 
 /**
  *
@@ -23,6 +25,13 @@ public class ControleUsoTickets {
     {
     
     }
+    public void IniciaTelaLogin(TelaInicial telai)
+    {
+        TelaLogin telinha  = (new TelaLogin());
+        telinha.setVisible(true);
+        telai.setVisible(false);
+    }
+    
     public void iniciaControle(String imat,String ient) throws SQLException
     {
         matricula = imat;
@@ -45,6 +54,7 @@ public class ControleUsoTickets {
        
     
     public void utilizarTicket(String ticket) throws SQLException {
+ 
         if(!db.verificaTicket(matricula,ticket).isEmpty()) {
             if(db.deletarTicket(matricula, ticket) == 1){
                 JOptionPane.showMessageDialog(null, "Tíquete deletado com sucesso.");

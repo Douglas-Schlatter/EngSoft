@@ -26,7 +26,6 @@ public class TelaGerente extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
         CriarEnquete = new javax.swing.JButton();
         PesquisarEnquete = new javax.swing.JButton();
         BtnSair = new javax.swing.JButton();
@@ -34,8 +33,6 @@ public class TelaGerente extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jLabel1.setText("Placeholder Tela Gerente");
 
         CriarEnquete.setText("Criar Enquete");
         CriarEnquete.addActionListener(new java.awt.event.ActionListener() {
@@ -78,10 +75,7 @@ public class TelaGerente extends javax.swing.JFrame {
                                 .addComponent(jLabel2))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(404, 404, 404)
-                                .addComponent(PesquisarEnquete, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(121, 121, 121)
-                                .addComponent(jLabel1))))
+                                .addComponent(PesquisarEnquete, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(BtnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -100,9 +94,7 @@ public class TelaGerente extends javax.swing.JFrame {
                         .addGap(43, 43, 43))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
-                        .addGap(34, 34, 34)
-                        .addComponent(jLabel1)
-                        .addGap(53, 53, 53)
+                        .addGap(103, 103, 103)
                         .addComponent(CriarEnquete, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(59, 59, 59)
                         .addComponent(PesquisarEnquete, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -171,7 +163,6 @@ public class TelaGerente extends javax.swing.JFrame {
     private javax.swing.JButton BtnSair;
     private javax.swing.JButton CriarEnquete;
     private javax.swing.JButton PesquisarEnquete;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     // End of variables declaration//GEN-END:variables
