@@ -3,7 +3,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package view;
-
+import Main.Main;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author rsrsaaa
@@ -65,6 +68,11 @@ public class TelaComprar extends javax.swing.JFrame {
         jLabel4.setText("Quantidade de Tickets");
 
         BtnComprar.setText("Comprar");
+        BtnComprar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnComprarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -129,6 +137,16 @@ public class TelaComprar extends javax.swing.JFrame {
     private void tipoTicketsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipoTicketsActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tipoTicketsActionPerformed
+
+    private void BtnComprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnComprarActionPerformed
+        
+        
+        try {
+            Main.controleT.ComprarTicket(tipoTickets.getSelectedItem().toString(),(int)quantTickets.getModel().getValue());// TODO add your handling code here:
+        } catch (SQLException ex) {
+            Logger.getLogger(TelaComprar.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_BtnComprarActionPerformed
 
     /**
      * @param args the command line arguments

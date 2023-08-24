@@ -4,7 +4,7 @@
  */
 package view;
 
-import Main.Back.Main;
+import Main.Main;
 import ctr.ControleUsuario;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -72,7 +72,7 @@ public class TelaLogin extends javax.swing.JFrame {
         });
 
         jButton2.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
-        jButton2.setText("Sair");
+        jButton2.setText("Voltar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -175,7 +175,9 @@ public class TelaLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+        TelaInicial telinha  = (new TelaInicial());
+        telinha.setVisible(true);
+        this.setVisible(false);// TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**

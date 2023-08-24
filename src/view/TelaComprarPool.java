@@ -94,17 +94,18 @@ public class TelaComprarPool extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Voltar)
-                            .addComponent(jLabel1))
-                        .addGap(299, 299, 299)
+                        .addComponent(jLabel1)
+                        .addGap(301, 301, 301)
                         .addComponent(jLabel2))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(519, 519, 519)
                         .addComponent(BtnComprar))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(542, 542, 542)
-                        .addComponent(jLabel5)))
+                        .addComponent(jLabel5))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(108, 108, 108)
+                        .addComponent(Voltar)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -128,9 +129,9 @@ public class TelaComprarPool extends javax.swing.JFrame {
                 .addComponent(ComboPool, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(81, 81, 81)
                 .addComponent(BtnComprar)
-                .addGap(206, 206, 206)
+                .addGap(60, 60, 60)
                 .addComponent(Voltar)
-                .addContainerGap())
+                .addGap(152, 152, 152))
         );
 
         pack();

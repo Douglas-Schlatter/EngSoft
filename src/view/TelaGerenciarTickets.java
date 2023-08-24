@@ -4,7 +4,7 @@
  */
 package view;
 
-import Main.Back.Main;
+import Main.Main;
 
 /**
  *
@@ -119,11 +119,18 @@ public class TelaGerenciarTickets extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        TelaTransferirTickets telinha  = (new TelaTransferirTickets());
+        telinha.setVisible(true);
+        this.setVisible(false);
+
+
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // TODO add your handling code here:
+        TelaCompraTickets telinha  = (new TelaCompraTickets());
+        telinha.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void visualizarTicketsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_visualizarTicketsButtonActionPerformed

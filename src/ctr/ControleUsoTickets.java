@@ -16,6 +16,8 @@ import model.DatabaseLink;
 import view.TelaGerenciarTickets;
 import view.TelaTickets;
 import view.TelaVisualizacao;
+import Main.Main;
+import java.util.Random;
 
 /**
  *
@@ -61,22 +63,54 @@ public class ControleUsoTickets {
             }
         }
             else {
-                JOptionPane.showMessageDialog(null, "Tíquete não existe no banco de dados");
+                JOptionPane.showMessageDialog(null, "Tíquete não existe");
             }
         }
         
         else{  // é pool
             if(!db.verificaPool(matricula,ticket).isEmpty()) {
                 if(db.descontarPool(matricula, ticket) == 1){
-                  JOptionPane.showMessageDialog(null, "Pool atualizada.");
+                  JOptionPane.showMessageDialog(null, "Pool Utilizada.");
             }
         }
             else {
-                JOptionPane.showMessageDialog(null, "Este usuário não participa da pool informada.");
+                JOptionPane.showMessageDialog(null, "Este usuário não participa da pool informada ou essa pool ja esta esgotada");
             }
         }
         
         
+    }
+    //1 cod = 50 usos -> unico
+    //50 cod = 1 usos ->mult
+    public void ComprarTicket(String tipo,int quantidade) throws SQLException
+    {
+        System.out.println(Main.controleU.matricula);
+        matricula = Main.controleU.matricula;
+        if(tipo == "Único")
+        {
+            for(int i = 0;  i<quantidade; i++)
+            {
+                Random rnd = new Random();
+                int number = rnd.nextInt(999999);
+
+
+               String tick = "0"+ String.format("%07d", number);
+               Main.controleU.db.inserirTicket(matricula,tick, 1);
+            }
+        
+        }
+        else
+        {
+                Random rnd = new Random();
+                int number = rnd.nextInt(999999);
+
+
+               String tick = "0"+ String.format("%07d", number);
+               Main.controleU.db.inserirTicket(matricula,tick, quantidade);
+        }
+        
+        //Main.controleU.db.inserirTicket();
+        //System.out.println(restult);
     }
     
     

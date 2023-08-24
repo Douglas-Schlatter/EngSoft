@@ -4,7 +4,7 @@
  */
 package view;
 
-import Main.Back.Main;
+import Main.Main;
 
 /**
  *
