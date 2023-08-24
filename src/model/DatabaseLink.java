@@ -297,5 +297,21 @@ public class DatabaseLink {
        
         return result;
     }
+    public int inserirTicket(String matricula, String ticket,int usos) throws SQLException //
+    {
+        try{
+             Class.forName("org.postgresql.Driver");
+        }catch(Exception e){
+            e.getMessage();
+        }
+        int result = 0;
+
+        String sql = (String) "INSERT INTO Tiquetes VALUES ('"+ticket+"', '"+matricula+"',"+usos+")";
+       // String sql = (String) "INSERT INTO Tiquetes VALUES ('01101011', '0',10)";
+        result = statement.executeUpdate(sql);
+
+        return result;
+    }
+    
 
 }

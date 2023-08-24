@@ -8,6 +8,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import model.DatabaseLink;
+import Main.Main;
+import java.util.Random;
 
 /**
  *
@@ -68,6 +70,38 @@ public class ControleUsoTickets {
         }
         
         
+    }
+    //1 cod = 50 usos -> unico
+    //50 cod = 1 usos ->mult
+    public void ComprarTicket(String tipo,int quantidade) throws SQLException
+    {
+        System.out.println(Main.controleU.matricula);
+        matricula = Main.controleU.matricula;
+        if(tipo == "Único")
+        {
+            for(int i = 0;  i<quantidade; i++)
+            {
+                Random rnd = new Random();
+                int number = rnd.nextInt(999999);
+
+
+               String tick = "0"+ String.format("%07d", number);
+               Main.controleU.db.inserirTicket(matricula,tick, 1);
+            }
+        
+        }
+        else
+        {
+                Random rnd = new Random();
+                int number = rnd.nextInt(999999);
+
+
+               String tick = "0"+ String.format("%07d", number);
+               Main.controleU.db.inserirTicket(matricula,tick, quantidade);
+        }
+        
+        //Main.controleU.db.inserirTicket();
+        //System.out.println(restult);
     }
     
 }
