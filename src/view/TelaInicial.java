@@ -212,7 +212,9 @@ public class TelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_utilizarTicketButtonActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        Main.controleT.IniciaTelaLogin(this);
+        TelaLogin telinha  = (new TelaLogin());
+        telinha.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**

@@ -5,7 +5,7 @@
 package Main;
 
 
-import ctr.ControleInterface;
+//import ctr.ControleInterface;
 import ctr.ControleUsoTickets;
 import ctr.ControleUsuario;
 import model.DatabaseLink;
@@ -22,7 +22,7 @@ public class Main {
 
     public static ControleUsuario controleU = new ControleUsuario(); 
     public static ControleUsoTickets controleT = new ControleUsoTickets();
-    public static ControleInterface controleI = new ControleInterface();
+    //public static ControleInterface controleI = new ControleInterface();
     public static void main(String[] args) {
         
         

@@ -48,22 +48,22 @@ public class ControleUsoTickets {
         if(ticket.charAt(0) == '0'){ // é ticket
             if(!db.verificaTicket(matricula,ticket).isEmpty()) {
                 if(db.deletarTicket(matricula, ticket) == 1){
-                  JOptionPane.showMessageDialog(null, "Tíquete deletado com sucesso.");
+                  JOptionPane.showMessageDialog(null, "Tíquete Utilizado com sucesso.");
             }
         }
             else {
-                JOptionPane.showMessageDialog(null, "Tíquete não existe no banco de dados");
+                JOptionPane.showMessageDialog(null, "Tíquete não existe");
             }
         }
         
         else{  // é pool
             if(!db.verificaPool(matricula,ticket).isEmpty()) {
                 if(db.descontarPool(matricula, ticket) == 1){
-                  JOptionPane.showMessageDialog(null, "Pool atualizada.");
+                  JOptionPane.showMessageDialog(null, "Pool Utilizada.");
             }
         }
             else {
-                JOptionPane.showMessageDialog(null, "Este usuário não participa da pool informada.");
+                JOptionPane.showMessageDialog(null, "Este usuário não participa da pool informada ou essa pool ja esta esgotada");
             }
         }
         
